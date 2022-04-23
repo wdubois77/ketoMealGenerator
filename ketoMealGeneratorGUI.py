@@ -21,6 +21,7 @@ buyingTip = StringVar()
 cookingTip = StringVar()
 clickedVegetables = StringVar()  
 clickedSauces = StringVar()
+message = StringVar()
 
 def OpenNewWindow():
     
@@ -31,9 +32,11 @@ def OpenNewWindow():
 
     def btnSavePlanClicked():
         ExportSevenDayMealPlan()
+        message.set("Meal plan successfully saved!")
 
     def btnAnalysePlanClicked():
-        CheckVariation(GetSevenDayMealPlan())
+        analysis = CheckVariation(GetSevenDayMealPlan())
+        message.set(analysis)
 
     newWindow = Toplevel(top)
     newWindow.title("Seven day meal plan") 
@@ -48,9 +51,11 @@ def OpenNewWindow():
     newWindow.rowconfigure(1, weight=1)
     newWindow.rowconfigure(2, weight=1)
     newWindow.rowconfigure(3, weight=1)
+    newWindow.rowconfigure(4, weight=1)
+    newWindow.rowconfigure(5, weight=1)
     newWindow.columnconfigure(0, minsize=40)
-    newWindow.columnconfigure(1, weight=2)
-    newWindow.columnconfigure(2, weight=1)
+    newWindow.columnconfigure(1, weight=2, uniform='column')
+    newWindow.columnconfigure(2, weight=1, uniform='column')
     #newWindow.columnconfigure(3, weight=1)
 
     lbxMealPlan = Listbox(newWindow)#, width=80)
@@ -61,7 +66,12 @@ def OpenNewWindow():
     btnAnalysePlan = Button(newWindow, text="Analyse meal plan", command=btnAnalysePlanClicked)
     btnAnalysePlan.grid(row=2, column=1, sticky='e')
 
+    lblMessages = Label(newWindow, textvariable=message, bg="#271916", fg="white")
+    lblMessages.grid(row=4, column=1, sticky='w')
+
     LoadSevenDayMealPlan(GetSevenDayMealPlan())
+    message.set("")
+
 
 def btnExportWeekPlanClicked():
     OpenNewWindow()

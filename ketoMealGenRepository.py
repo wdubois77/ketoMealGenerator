@@ -248,10 +248,12 @@ def CheckVariation(mealplan):
     for item in listProteinSources:
         if item in listMeats:
             counterMeat += 1
-
-    print(counterMeat)
-
-        
-    #return result
+    maxMeatRatio = 4 / 7
+    numberOfEntriesInPlan = len(listProteinSources)
+    if counterMeat / numberOfEntriesInPlan > maxMeatRatio:
+        result = "Meat is planned on " + str(counterMeat) + " of the " + str(numberOfEntriesInPlan) + " days. \nTry to provide more variety and plan more often for fish and/or poultry."
+    else:
+        result = "There is enough variety between meat and other protein sources."
+    return result
 
  

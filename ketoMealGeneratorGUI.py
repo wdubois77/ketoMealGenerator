@@ -27,16 +27,13 @@ def OpenNewWindow():
     def LoadSevenDayMealPlan(mealPlan):
         for item in mealPlan:
             mealWithDate = item[0] + item[1]
-            lbxMealPlan.insert("end", mealWithDate)
-    
-    def CheckVariation(mealPlan):
-        pass
+            lbxMealPlan.insert("end", mealWithDate)    
 
     def btnSavePlanClicked():
-        pass
+        ExportSevenDayMealPlan()
 
     def btnAnalysePlanClicked():
-        pass
+        CheckVariation(GetSevenDayMealPlan())
 
     newWindow = Toplevel(top)
     newWindow.title("Seven day meal plan") 
@@ -60,13 +57,13 @@ def OpenNewWindow():
     lbxMealPlan.grid(row=1, column=1, sticky="nsew")
 
     btnSavePlan = Button(newWindow, text="Save plan as txt-file", command=btnSavePlanClicked)
-    btnSavePlan.grid(row=2, column=1)#, sticky='n')
-    btnSavePlan = Button(newWindow, text="Analyse meal plan", command=btnAnalysePlanClicked)
+    btnSavePlan.grid(row=2, column=1)
+    btnAnalysePlan = Button(newWindow, text="Analyse meal plan", command=btnAnalysePlanClicked)
+    btnAnalysePlan.grid(row=2, column=1, sticky='e')
 
     LoadSevenDayMealPlan(GetSevenDayMealPlan())
 
 def btnExportWeekPlanClicked():
-    ExportSevenDayMealPlan()
     OpenNewWindow()
 
 def LoadAllMeals():

@@ -148,16 +148,6 @@ def GetAllPlannedMeals():
         listMeals.append((key.date().strftime('%A %d/%m/%Y : '), dictMeals[key]))
     return listMeals
 
-def GetSevenDayMealPlan():
-    dictMeals = GetMealsDict()
-    listSevenDaysMeals = []
-    stringDateOfToday = str(date.today())
-    dateOfToday = datetime.strptime(stringDateOfToday, '%Y-%m-%d')
-    for key in dictMeals:
-        if key >= dateOfToday and key < dateOfToday + timedelta(days=7):
-            listSevenDaysMeals.append((key.date().strftime('%A %d/%m/%Y : '), dictMeals[key]))
-    return listSevenDaysMeals
-
 def ExportSevenDayMealPlan():
     mealPlan = GetSevenDayMealPlan()
     mealsWithDates = []
@@ -231,4 +221,37 @@ def PrintBereidingstip():
     if tip == "":
         tip = "Nog geen bereidingstip beschikbaar."
     return tip
+
+def GetSevenDayMealPlan():
+    dictMeals = GetMealsDict()
+    listSevenDaysMeals = []
+    stringDateOfToday = str(date.today())
+    dateOfToday = datetime.strptime(stringDateOfToday, '%Y-%m-%d')
+    for key in dictMeals:
+        if key >= dateOfToday and key < dateOfToday + timedelta(days=7):
+            listSevenDaysMeals.append((key.date().strftime('%A %d/%m/%Y : '), dictMeals[key]))
+    return listSevenDaysMeals
+
+def CheckVariation(mealplan):
+    listProteinSources = []
+    for item in mealplan:
+        mealElements = item[1].split(' / ')
+        listProteinSources.append(mealElements[0])
+    listMeats = []
+    with open('data/protein_sources2.csv') as fileObject:
+        reader = csv.reader(fileObject)
+        next(fileObject)
+        for row in reader:
+            if row[3] == 'vlees' or row[3] == 'wild':
+                listMeats.append(row[1])
+    counterMeat = 0
+    for item in listProteinSources:
+        if item in listMeats:
+            counterMeat += 1
+
+    print(counterMeat)
+
+        
+    #return result
+
  

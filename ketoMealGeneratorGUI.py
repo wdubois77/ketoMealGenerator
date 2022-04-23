@@ -35,6 +35,9 @@ def OpenNewWindow():
     def btnSavePlanClicked():
         pass
 
+    def btnAnalysePlanClicked():
+        pass
+
     newWindow = Toplevel(top)
     newWindow.title("Seven day meal plan") 
     newWindow.geometry("751x500")
@@ -58,6 +61,7 @@ def OpenNewWindow():
 
     btnSavePlan = Button(newWindow, text="Save plan as txt-file", command=btnSavePlanClicked)
     btnSavePlan.grid(row=2, column=1)#, sticky='n')
+    btnSavePlan = Button(newWindow, text="Analyse meal plan", command=btnAnalysePlanClicked)
 
     LoadSevenDayMealPlan(GetSevenDayMealPlan())
 

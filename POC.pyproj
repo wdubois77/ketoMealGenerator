@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{11b3d391-5145-492d-b4fb-d59d8141727b}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>ketoMealGeneratorGUI.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>Global|PythonCore|3.10</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ketoMealGeneratorConsoleApp.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ketoMealGeneratorGUI.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="meal.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ketoMealGenRepository.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\avo2.png" />
+    <Content Include="data\ketoFood2.png" />
+    <Content Include="data\mealplan.csv" />
+    <Content Include="data\protein_sources2.csv" />
+    <Content Include="data\sauces2.csv" />
+    <Content Include="data\sauces2.csv_with_UTF-8_BOM.csv" />
+    <Content Include="data\sevenDayMealPlan.txt" />
+    <Content Include="data\vegetables2.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.10" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

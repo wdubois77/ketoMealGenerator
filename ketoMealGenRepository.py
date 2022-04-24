@@ -253,7 +253,7 @@ def CheckVariation(mealplan):
     if counterMeat / numberOfEntriesInPlan > maxMeatRatio:
         result = "Meat is planned on " + str(counterMeat) + " of the " + str(numberOfEntriesInPlan) + " days. \nTry to provide more variety and plan more often for fish and/or poultry."
     else:
-        result = "There is enough variety between meat and other protein sources."
+        result = "Meat is only planned on " + str(counterMeat) + " of the " + str(numberOfEntriesInPlan) + " days. \nThis means sufficient variety between meat and other protein sources."
     return result
 
  

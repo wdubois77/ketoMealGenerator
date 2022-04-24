@@ -191,12 +191,38 @@ def GetVegetables():
 
 def GetSauces():
     sauces = []
-    with open('data/sauces2.csv') as fileObject:
+    with open('data/sauces2.csv_with_UTF-8_BOM.csv') as fileObject:
         reader = csv.reader(fileObject)
         next(fileObject)
         for row in reader:
             sauces.append(row[1])
     return sauces
+
+def GetAllEssentials():
+    essentials = []
+    with open('data/sauces2.csv_with_UTF-8_BOM.csv') as fileObject:
+        reader = csv.reader(fileObject)
+        next(fileObject)
+        for row in reader:
+            essentials.append(row[7])
+    essentialsSplitted = []
+    for item in essentials:
+        essentialsElements = item.split(' ')
+        for element in essentialsElements:
+            essentialsSplitted.append(element)
+    essentialsSplitted = list(set(essentialsSplitted))
+    return essentialsSplitted
+
+def GetSauceEssentials(sauce):
+    sauceEssentialsString = ""
+    with open('data/sauces2.csv_with_UTF-8_BOM.csv') as fileObject:
+        reader = csv.reader(fileObject)
+        next(fileObject)
+        for row in reader:
+            if sauce == row[1]:
+                sauceEssentialsString = row[7]
+    sauceEssentials = sauceEssentialsString.split(' ')
+    return sauceEssentials
 
 def GetTips(meal):    
     mealElements = str(meal).split('/')

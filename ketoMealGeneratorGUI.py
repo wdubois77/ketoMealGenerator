@@ -22,6 +22,7 @@ cookingTip = StringVar()
 clickedVegetables = StringVar()  
 clickedSauces = StringVar()
 message = StringVar()
+listEssentials = StringVar()
 
 def OpenNewWindow():
     
@@ -38,6 +39,24 @@ def OpenNewWindow():
         analysis = CheckVariation(GetSevenDayMealPlan())
         message.set(analysis)
 
+    def Callback(event):
+        essentialsString = "Keto essentials\nfor selected meal:\n\n"
+        selection = event.widget.curselection()
+        if selection:
+            index = selection[0]
+            data = event.widget.get(index)
+            mealElements = data.split(' / ')
+            sauce = mealElements[-1]
+            # controle op 3 of maar 2 ('s') elementen ?
+            #print(sauce)
+            for item in GetSauceEssentials(sauce):                
+                essentialsString += str(item) 
+                essentialsString += '\n'
+                #print(item)
+            listEssentials.set(essentialsString)
+        else:
+            listEssentials.set("")
+
     newWindow = Toplevel(top)
     newWindow.title("Seven day meal plan") 
     newWindow.geometry("751x500")
@@ -48,29 +67,34 @@ def OpenNewWindow():
     lblBg2.image = bgimg2
     lblBg2.config(image=lblBg2.image)
     newWindow.rowconfigure(0, minsize=40)
-    newWindow.rowconfigure(1, weight=1)
-    newWindow.rowconfigure(2, weight=1)
-    newWindow.rowconfigure(3, weight=1)
-    newWindow.rowconfigure(4, weight=1)
-    newWindow.rowconfigure(5, weight=1)
+    newWindow.rowconfigure(1, weight=1, uniform='row')
+    newWindow.rowconfigure(2, weight=1, uniform='row')
+    newWindow.rowconfigure(3, weight=1, uniform='row')
+    newWindow.rowconfigure(4, weight=1, uniform='row')
+    newWindow.rowconfigure(5, weight=1, uniform='row')
     newWindow.columnconfigure(0, minsize=40)
     newWindow.columnconfigure(1, weight=2, uniform='column')
     newWindow.columnconfigure(2, weight=1, uniform='column')
     #newWindow.columnconfigure(3, weight=1)
 
     lbxMealPlan = Listbox(newWindow)#, width=80)
-    lbxMealPlan.grid(row=1, column=1, sticky="nsew")
+    lbxMealPlan.grid(row=1, column=1, rowspan=2, sticky="nsew")
+    lbxMealPlan.bind("<<ListboxSelect>>", Callback)
 
     btnSavePlan = Button(newWindow, text="Save plan as txt-file", command=btnSavePlanClicked)
-    btnSavePlan.grid(row=2, column=1)
+    btnSavePlan.grid(row=3, column=1)
     btnAnalysePlan = Button(newWindow, text="Analyse meal plan", command=btnAnalysePlanClicked)
-    btnAnalysePlan.grid(row=2, column=1, sticky='e')
+    btnAnalysePlan.grid(row=3, column=1, sticky='e')
 
     lblMessages = Label(newWindow, textvariable=message, bg="#271916", fg="white")
     lblMessages.grid(row=4, column=1, sticky='w')
 
+    lblEssentials = Label(newWindow, textvariable=listEssentials, bg="#271916", fg="white")
+    lblEssentials.grid(row=1, column=2, rowspan=4, sticky='n')
+
     LoadSevenDayMealPlan(GetSevenDayMealPlan())
     message.set("")
+    listEssentials.set("")
 
 
 def btnExportWeekPlanClicked():

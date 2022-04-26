@@ -4,6 +4,7 @@ from tkinter import Image
 from tkinter import ttk
 from tkcalendar import Calendar, DateEntry
 from ketoMealGenRepository import *
+import os
 
 top = Tk()
 top.title("Keto Meal Generator")
@@ -48,11 +49,9 @@ def OpenNewWindow():
             mealElements = data.split(' / ')
             sauce = mealElements[-1]
             # controle op 3 of maar 2 ('s') elementen ?
-            #print(sauce)
             for item in GetSauceEssentials(sauce):                
                 essentialsString += str(item) 
                 essentialsString += '\n'
-                #print(item)
             listEssentials.set(essentialsString)
         else:
             listEssentials.set("")
@@ -108,16 +107,23 @@ def LoadAllMeals():
         lbxMeals.insert("end", mealWithDate)
 
 def btnGenerateKetoMealClicked():
-    mealString.set(PrintMeal())
-    btnShowBuyingTip["state"] = "normal"
-    btnShowCookingTip["state"] = "normal"
-    btnSaveMeal["state"] = "normal"
-    buyingTip.set("")
-    cookingTip.set("")
-    dropVegetable.configure(state="normal")
-    dropSauces.configure(state="normal")
-    #clickedVegetables.set( "Change vegetable*" )
-    #clickedSauces.set("Change sauce")
+    #try:
+    filePathProteins = 'data/protein_sources2.csv'
+    filePathVegetables = 'data/vegetables2.csv'
+    filePathSauces = 'data/sauces2.csv_with_UTF-8_BOM.csv'
+    if os.path.isfile(filePathProteins) and os.path.isfile(filePathVegetables) and os.path.isfile(filePathSauces):
+        mealString.set(PrintMeal())
+        btnShowBuyingTip["state"] = "normal"
+        btnShowCookingTip["state"] = "normal"
+        btnSaveMeal["state"] = "normal"
+        buyingTip.set("")
+        cookingTip.set("")
+        dropVegetable.configure(state="normal")
+        dropSauces.configure(state="normal")
+    else:
+        mealString.set("Error: data file(s) not found")
+    #except (FileNotFoundError, IOError) as e:
+    #     mealString.set(e)
 
 def Changed(*args):
     selectedVegetable = clickedVegetables.get()

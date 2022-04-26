@@ -2,15 +2,21 @@ import csv
 import random
 from datetime import datetime, date, timedelta
 import calendar
+import os
 
 def GetRandomProteinSource():
+    ##try:
+    filePath = 'data/protein_sources2.csv'
     proteinSources = []
-    with open('data/protein_sources2.csv') as fileObject:
+    with open(filePath) as fileObject:
         reader = csv.reader(fileObject)
         next(fileObject)
         for row in reader:
             proteinSources.append(row[1] + "/" + row[8] + "/" + row[9] + "/" + row[10])
     return random.sample(proteinSources, 1)
+    #except:
+    #    print("Exception!")
+    #    raise
 
 def GetRandomVegetable():
     vegetables = []
@@ -32,6 +38,7 @@ def GetRandomSauce():
     return str(random.sample(sauces, 1))
 
 def PrintMeal():
+    #try:
     global mealString2
     global proteinSourceName
     global proteinAankooptip
@@ -57,6 +64,8 @@ def PrintMeal():
         randomVegetable = randomVegetable.replace(character, '')
         randomSauce = randomSauce.replace(character, '')
     return mealString2
+    #except:
+    #    raise
 
 def UpdateMeal(vegetable, sauce):
     if 's' in proteinTimeMode:

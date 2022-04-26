@@ -105,18 +105,28 @@ def RemoveMeal(datum):
             if dateOutCsv != datum:
                 newRows.append(row)
             next(inp)
-    with open("data/mealplan.csv", 'w') as out:
-        writer = csv.writer(out)
-        for row in newRows:
-            writer.writerow(row)
+    try:
+        with open("data/mealplan.csv", 'w') as out:
+            writer = csv.writer(out)
+            for row in newRows:
+                writer.writerow(row)
+    except PermissionError:
+        print("PermissionError!")
 
 def SaveMeal(datum, meal):
     datumString = datum.strftime('%d/%m/%Y')
     row = [datumString, meal]
     RemoveMeal(datumString)
-    with open("data/mealplan.csv", 'a') as fileObject:
-        writer = csv.writer(fileObject)
-        writer.writerow(row)
+    isSaved = True
+    try:
+        with open("data/mealplan.csv", 'a') as fileObject:
+            writer = csv.writer(fileObject)
+            writer.writerow(row)
+    except PermissionError:
+        print("PermissionError!")
+        isSaved = False
+    finally:
+        return isSaved
 
 def CheckIfSufficientVariation(datum):
     result = True

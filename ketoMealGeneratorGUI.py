@@ -11,11 +11,13 @@ top.title("Keto Meal Generator")
 top.geometry("800x550")
 top.resizable(width=False, height=False)
 
-bgimg = PhotoImage(file='data/avo2.png')
-lblBg = Label(top, image=bgimg)
-lblBg.place(x=0, y=0, relwidth=1, relheight=1)
-lblBg.image = bgimg
-lblBg.config(image=lblBg.image)
+filePathImageMaster = 'data/avo2.png'
+if os.path.isfile(filePathImageMaster):
+    bgimg = PhotoImage(file=filePathImageMaster)
+    lblBg = Label(top, image=bgimg)
+    lblBg.place(x=0, y=0, relwidth=1, relheight=1)
+    lblBg.image = bgimg
+    lblBg.config(image=lblBg.image)
 
 mealString = StringVar()
 buyingTip = StringVar()
@@ -60,11 +62,15 @@ def OpenNewWindow():
     newWindow.title("Seven day meal plan") 
     newWindow.geometry("751x500")
     newWindow.resizable(width=False, height=False)    
-    bgimg2 = PhotoImage(file='data/ketoFood2.png')
-    lblBg2 = Label(newWindow, image=bgimg2)
-    lblBg2.place(x=0, y=0, relwidth=1, relheight=1)
-    lblBg2.image = bgimg2
-    lblBg2.config(image=lblBg2.image)
+    
+    filePathImageSecond = 'data/ketoFood2.png'
+    if os.path.isfile(filePathImageSecond):
+        bgimg2 = PhotoImage(file=filePathImageSecond)
+        lblBg2 = Label(newWindow, image=bgimg2)
+        lblBg2.place(x=0, y=0, relwidth=1, relheight=1)
+        lblBg2.image = bgimg2
+        lblBg2.config(image=lblBg2.image)
+    
     newWindow.rowconfigure(0, minsize=40)
     newWindow.rowconfigure(1, weight=1, uniform='row')
     newWindow.rowconfigure(2, weight=1, uniform='row')
@@ -128,7 +134,6 @@ def btnGenerateKetoMealClicked():
 def Changed(*args):
     selectedVegetable = clickedVegetables.get()
     selectedSauce = clickedSauces.get()
-    generatedMeal = mealString.get()
     mealString.set(UpdateMeal(selectedVegetable, selectedSauce))
 
 def btnShowBuyingTipClicked():
@@ -138,26 +143,38 @@ def btnShowCookingTipClicked():
     cookingTip.set(PrintBereidingstip())
 
 def btnSaveMealClicked():
-    datum = datePicker.get_date()
-    datumString = datum.strftime('%d/%m/%Y')
-    listWeekendDays = ['Saturday','Sunday']
-    nameSelectedDay = datum.strftime('%A')
-    message = ""
-    result = True
-    if NeedsTime():
-        if nameSelectedDay not in listWeekendDays:
-            message = "It might be better to plan this meal for the weekend because it takes some time to prepare.\nDo you still want to save this meal?"
-            result = messagebox.askyesno('Time consuming preparation', message)
-    if result == True:
-        if CheckIfSufficientVariation(datum) == False:
-            message = GetProteinSourceName() + " was/is already planned less than two weeks prior to " + datumString + ".\nDo you still want to save this meal?"
-            result = messagebox.askyesno('Ensure sufficient variation', message)
-            if result == True:
-                SaveMeal(datum, mealString.get())
-                LoadAllMeals()
-        else:
-            SaveMeal(datum, mealString.get())
-            LoadAllMeals()
+    #try:
+    filePathMealPlan = 'data/mealplan.csv'
+    if os.path.isfile(filePathMealPlan):
+        datum = datePicker.get_date()
+        datumString = datum.strftime('%d/%m/%Y')
+        listWeekendDays = ['Saturday','Sunday']
+        nameSelectedDay = datum.strftime('%A')
+        message = ""
+        result = True
+        if NeedsTime():
+            if nameSelectedDay not in listWeekendDays:
+                message = "It might be better to plan this meal for the weekend because it takes some time to prepare.\nDo you still want to save this meal?"
+                result = messagebox.askyesno('Time consuming preparation', message)
+        if result == True:
+            if CheckIfSufficientVariation(datum) == False:
+                message = GetProteinSourceName() + " was/is already planned less than two weeks prior to " + datumString + ".\nDo you still want to save this meal?"
+                result = messagebox.askyesno('Ensure sufficient variation', message)
+                if result == True:
+                    isSaved = SaveMeal(datum, mealString.get())
+                    if not isSaved:
+                        mealString.set("Error: operation failed")
+                    else:
+                        LoadAllMeals()
+            else:
+                isSaved = SaveMeal(datum, mealString.get())
+                if not isSaved:
+                    mealString.set("Error: operation failed")
+                else:
+                    LoadAllMeals()
+    #except PermissionError:
+    #    print("Exception!")
+
 
 def btnDeleteMealClicked():
     if lbxMeals.curselection():

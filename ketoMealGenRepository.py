@@ -5,18 +5,17 @@ import calendar
 import os
 
 def GetRandomProteinSource():
-    ##try:
-    filePath = 'data/protein_sources2.csv'
-    proteinSources = []
-    with open(filePath) as fileObject:
-        reader = csv.reader(fileObject)
-        next(fileObject)
-        for row in reader:
-            proteinSources.append(row[1] + "/" + row[8] + "/" + row[9] + "/" + row[10])
-    return random.sample(proteinSources, 1)
-    #except:
-    #    print("Exception!")
-    #    raise
+    try:
+        filePath = 'data/protein_sources2.csv'
+        proteinSources = []
+        with open(filePath) as fileObject:
+            reader = csv.reader(fileObject)
+            next(fileObject)
+            for row in reader:
+                proteinSources.append(row[1] + "/" + row[8] + "/" + row[9] + "/" + row[10])
+        return random.sample(proteinSources, 1)
+    except Exception as e:
+        return e.__class__.__name__
 
 def GetRandomVegetable():
     vegetables = []
@@ -38,34 +37,36 @@ def GetRandomSauce():
     return str(random.sample(sauces, 1))
 
 def PrintMeal():
-    #try:
-    global mealString2
-    global proteinSourceName
-    global proteinAankooptip
-    global proteinBereidingstip
-    global proteinTimeMode
-    global randomVegetable
-    global randomSauce
-    proteinElements = str(GetRandomProteinSource()).split('/')
-    proteinSourceName = str(proteinElements[0])
-    proteinAankooptip = str(proteinElements[1])
-    proteinBereidingstip = str(proteinElements[2])
-    proteinTimeMode = str(proteinElements[3])
-    randomVegetable = str(GetRandomVegetable())
-    randomSauce = str(GetRandomSauce())
-    if 's' in proteinTimeMode:
-        mealString2 = proteinSourceName + " / " + randomVegetable
-    else:
-        mealString2 = proteinSourceName + " / " + randomVegetable + " / " + randomSauce
-    for character in '[]\'':
-        mealString2 = mealString2.replace(character, '')
-        proteinSourceName = proteinSourceName.replace(character, '')
-        proteinTimeMode = proteinTimeMode.replace(character, '')
-        randomVegetable = randomVegetable.replace(character, '')
-        randomSauce = randomSauce.replace(character, '')
-    return mealString2
-    #except:
-    #    raise
+    try:
+        global mealString2
+        global proteinSourceName
+        global proteinAankooptip
+        global proteinBereidingstip
+        global proteinTimeMode
+        global randomVegetable
+        global randomSauce
+        randomProteinSourceWithTipsAndTimeMode = GetRandomProteinSource()
+        proteinElements = str(randomProteinSourceWithTipsAndTimeMode).split('/')
+        proteinSourceName = str(proteinElements[0])
+        proteinAankooptip = str(proteinElements[1])
+        proteinBereidingstip = str(proteinElements[2])
+        proteinTimeMode = str(proteinElements[3])
+        randomVegetable = str(GetRandomVegetable())
+        randomSauce = str(GetRandomSauce())
+        if 's' in proteinTimeMode:
+            mealString2 = proteinSourceName + " / " + randomVegetable
+        else:
+            mealString2 = proteinSourceName + " / " + randomVegetable + " / " + randomSauce
+        for character in '[]\'':
+            mealString2 = mealString2.replace(character, '')
+            proteinSourceName = proteinSourceName.replace(character, '')
+            proteinTimeMode = proteinTimeMode.replace(character, '')
+            randomVegetable = randomVegetable.replace(character, '')
+            randomSauce = randomSauce.replace(character, '')        
+    except:
+        mealString2 = "Something went wrong..."
+    finally:
+        return mealString2
 
 def UpdateMeal(vegetable, sauce):
     if 's' in proteinTimeMode:

@@ -113,24 +113,15 @@ def LoadAllMeals():
         lbxMeals.insert("end", mealWithDate)
 
 def btnGenerateKetoMealClicked():
-    #try:
-    filePathProteins = 'data/protein_sources2.csv'
-    filePathVegetables = 'data/vegetables2.csv'
-    filePathSauces = 'data/sauces2.csv_with_UTF-8_BOM.csv'
-    if os.path.isfile(filePathProteins) and os.path.isfile(filePathVegetables) and os.path.isfile(filePathSauces):
-        mealString.set(PrintMeal())
-        btnShowBuyingTip["state"] = "normal"
-        btnShowCookingTip["state"] = "normal"
-        btnSaveMeal["state"] = "normal"
-        buyingTip.set("")
-        cookingTip.set("")
-        dropVegetable.configure(state="normal")
-        dropSauces.configure(state="normal")
-    else:
-        mealString.set("Error: data file(s) not found")
-    #except (FileNotFoundError, IOError) as e:
-    #     mealString.set(e)
-
+    mealString.set(PrintMeal())
+    btnShowBuyingTip["state"] = "normal"
+    btnShowCookingTip["state"] = "normal"
+    btnSaveMeal["state"] = "normal"
+    buyingTip.set("")
+    cookingTip.set("")
+    dropVegetable.configure(state="normal")
+    dropSauces.configure(state="normal")
+ 
 def Changed(*args):
     selectedVegetable = clickedVegetables.get()
     selectedSauce = clickedSauces.get()
@@ -143,7 +134,6 @@ def btnShowCookingTipClicked():
     cookingTip.set(PrintBereidingstip())
 
 def btnSaveMealClicked():
-    #try:
     filePathMealPlan = 'data/mealplan.csv'
     if os.path.isfile(filePathMealPlan):
         datum = datePicker.get_date()
@@ -172,9 +162,6 @@ def btnSaveMealClicked():
                     mealString.set("Error: operation failed")
                 else:
                     LoadAllMeals()
-    #except PermissionError:
-    #    print("Exception!")
-
 
 def btnDeleteMealClicked():
     if lbxMeals.curselection():

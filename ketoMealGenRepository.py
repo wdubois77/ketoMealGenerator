@@ -302,4 +302,32 @@ def CheckVariation(mealplan):
         result = "Meat is only planned on " + str(counterMeat) + " of the " + str(numberOfEntriesInPlan) + " days. \nThis means sufficient variety between meat and other protein sources."
     return result
 
+def GetNutritionFacts(proteinSource, vegetable, sauce):
+    cal = 0
+    protein = 0
+    carbs = 0
+    fat = 0
+    with open('data/protein_sources2.csv') as fileObject:
+        reader = csv.reader(fileObject)
+        next(fileObject)
+        for row in reader:
+            if proteinSource == row[1]:
+                cal += int(row[4]) * 2
+                print(cal)
+    with open('data/vegetables2.csv') as fileObject:
+        reader = csv.reader(fileObject)
+        next(fileObject)
+        for row in reader:
+            if vegetable == row[1]:
+                cal += int(row[2]) * 2.5
+                print(int(row[2]) * 2.5)
+    with open('data/sauces2.csv_with_UTF-8_BOM.csv') as fileObject:
+        reader = csv.reader(fileObject)
+        next(fileObject)
+        for row in reader:
+            if sauce == row[1]:
+                cal += int(row[2]) * 0.4
+                print(int(row[2]) * 0.4)
+    return cal
+
  

@@ -50,13 +50,21 @@ def OpenNewWindow():
             data = event.widget.get(index)
             mealElements = data.split(' / ')
             sauce = mealElements[-1]
+            proteinSourceWithDate = mealElements[0]
+            proteinSourceWithDateElements = proteinSourceWithDate.split(' : ')
+            proteinSource = proteinSourceWithDateElements[1]
+            vegetable = mealElements[1]
+            facts = GetNutritionFacts(proteinSource, vegetable, sauce)
+            print(facts)
             # controle op 3 of maar 2 ('s') elementen ?
             for item in GetSauceEssentials(sauce):                
                 essentialsString += str(item) 
                 essentialsString += '\n'
+            essentialsString += '\nNutrition facts for\nselected meal\n(per serving):\n\n{cal} Kcal\n... g proteins (...%)\n... g net carbs (...%)\n... g fat (...%)\n'.format(cal=facts)
             listEssentials.set(essentialsString)
         else:
             listEssentials.set("")
+
 
     newWindow = Toplevel(top)
     newWindow.title("Seven day meal plan") 
@@ -253,6 +261,3 @@ btnExportWeekPlan.grid(row=14, column=1, sticky='e')
 LoadAllMeals()
 
 mainloop()
-
-
-

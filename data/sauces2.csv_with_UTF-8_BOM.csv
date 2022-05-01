@@ -1,16 +1,16 @@
 ﻿id,omschrijving,Kcal,eiwitten,net carbs,vetten,bereidingstip,essentials
-1,pesto,,,,,Zelfgemaakt uiteraard.,olijfolie basilicum parmezaan look pijnboompitten citroen
-2,béarnaisesaus,,,,,De boter klaren hoeft zelfs niet: zie de 'Peter Goossens-methode'.,boter azijn eieren dragon
-3,champignonsaus,,,,,"Vaak volstaat het voor een perfecte saus de aanbaksels in de pan los te roeren en room, mosterd en de gare champigons toe te voegen en wat te laten inkoken.",room40% mosterd
-4,pepersaus,,,,,"Vaak volstaat het voor een perfecte saus de aanbaksels in de pan los te roeren en room, mosterd en groene peperbolletjes toe te voegen en wat te laten inkoken.",room40% mosterd groenePeperbolletjes
-5,hollandaise met kappertjes,,,,,,boter citroen eieren kappertjes
-6,tartaarsaus,,,,,Zelfgemaakt uiteraard.,olijfolie eieren augurkjes kappertjes azijn mosterd
-7,bruine boter met kappertjes,,,,,,boter citroen kappertjes
-8,provençaalse saus,,,,,,olijfolie sjalot look tomaten paprika's champignons peterselie
-9,salsa tomaat komkommer,,,,,,olijfolie azijn sjalot tomaten komkommer peterselie
-10,chimichurri,,,,,,olijfolie azijn sjalot look paprika chilipeper oregano basilicum peterselie
-11,kerstomaatjes oven,,,,,,olijfolie tijm
-12,ratatouille,,,,,,olijfolie sjalot look tomaten paprika's champignons aubergine courgette peterselie
-13,tomatensaus,,,,,,olijfolie sjalot look tomaten basilicum
-14,paprikasaus,,,,,,room40% mosterd paprika
-15,à la flamande,,,,,De eieren niet te hard koken: zo wordt de boter beter opgenomen.,boter eieren peterselie
+1,pesto,600,13.5,8,64,Zelfgemaakt uiteraard.,olijfolie basilicum parmezaan look pijnboompitten citroen
+2,béarnaisesaus,601,14.5,1,65,De boter klaren hoeft zelfs niet: zie de 'Peter Goossens-methode'.,boter azijn eieren dragon
+3,champignonsaus,602,15.5,2,66,"Vaak volstaat het voor een perfecte saus de aanbaksels in de pan los te roeren en room, mosterd en de gare champigons toe te voegen en wat te laten inkoken.",room40% mosterd
+4,pepersaus,603,16.5,3,67,"Vaak volstaat het voor een perfecte saus de aanbaksels in de pan los te roeren en room, mosterd en groene peperbolletjes toe te voegen en wat te laten inkoken.",room40% mosterd groenePeperbolletjes
+5,hollandaise met kappertjes,604,17.5,4,68,,boter citroen eieren kappertjes
+6,tartaarsaus,605,18.5,5,69,Zelfgemaakt uiteraard.,olijfolie eieren augurkjes kappertjes azijn mosterd
+7,bruine boter met kappertjes,606,19.5,6,70,,boter citroen kappertjes
+8,provençaalse saus,607,20.5,7,71,,olijfolie sjalot look tomaten paprika's champignons peterselie
+9,salsa tomaat komkommer,608,21.5,8,72,,olijfolie azijn sjalot tomaten komkommer peterselie
+10,chimichurri,609,22.5,9,73,,olijfolie azijn sjalot look paprika chilipeper oregano basilicum peterselie
+11,kerstomaatjes oven,610,23.5,10,74,,olijfolie tijm
+12,ratatouille,611,24.5,11,75,,olijfolie sjalot look tomaten paprika's champignons aubergine courgette peterselie
+13,tomatensaus,612,25.5,12,76,,olijfolie sjalot look tomaten basilicum
+14,paprikasaus,613,26.5,13,77,,room40% mosterd paprika
+15,à la flamande,614,27.5,14,78,De eieren niet te hard koken: zo wordt de boter beter opgenomen.,boter eieren peterselie

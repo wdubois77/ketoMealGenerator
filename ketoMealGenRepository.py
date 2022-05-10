@@ -307,27 +307,37 @@ def GetNutritionFacts(proteinSource, vegetable, sauce):
     protein = 0
     carbs = 0
     fat = 0
+    facts = []
     with open('data/protein_sources2.csv') as fileObject:
         reader = csv.reader(fileObject)
         next(fileObject)
         for row in reader:
             if proteinSource == row[1]:
                 cal += int(row[4]) * 2
-                print(cal)
+                protein += float(row[5]) * 2
+                carbs += float(row[6]) * 2
+                fat += float(row[7]) * 2
     with open('data/vegetables2.csv') as fileObject:
         reader = csv.reader(fileObject)
         next(fileObject)
         for row in reader:
             if vegetable == row[1]:
                 cal += int(row[2]) * 2.5
-                print(int(row[2]) * 2.5)
+                protein += float(row[3]) * 2.5
+                carbs += float(row[4]) * 2.5
+                fat += float(row[5]) * 2.5
     with open('data/sauces2.csv_with_UTF-8_BOM.csv') as fileObject:
         reader = csv.reader(fileObject)
         next(fileObject)
         for row in reader:
             if sauce == row[1]:
                 cal += int(row[2]) * 0.4
-                print(int(row[2]) * 0.4)
-    return cal
+                protein += float(row[3]) * 0.4
+                carbs += float(row[4]) * 0.4
+                fat += float(row[5]) * 0.4
+    facts = [cal, round(protein, 1), round(carbs, 1), round(fat, 1)]
+    #for item in facts:
+        #print(item)
+    return facts
 
  

@@ -55,12 +55,12 @@ def OpenNewWindow():
             proteinSource = proteinSourceWithDateElements[1]
             vegetable = mealElements[1]
             facts = GetNutritionFacts(proteinSource, vegetable, sauce)
-            print(facts)
+            #print(facts)
             # controle op 3 of maar 2 ('s') elementen ?
             for item in GetSauceEssentials(sauce):                
                 essentialsString += str(item) 
                 essentialsString += '\n'
-            essentialsString += '\nNutrition facts for\nselected meal\n(per serving):\n\n{cal} Kcal\n... g proteins (...%)\n... g net carbs (...%)\n... g fat (...%)\n'.format(cal=facts)
+            essentialsString += '\nNutrition facts for\nselected meal\n(per serving):\n\n{cal} Kcal\n{protein} g proteins (...%)\n{carbs} g net carbs (...%)\n{fat} g fat (...%)\n'.format(cal=facts[0], protein=facts[1], carbs=facts[2], fat=facts[3])
             listEssentials.set(essentialsString)
         else:
             listEssentials.set("")

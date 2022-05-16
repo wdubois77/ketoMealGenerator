@@ -313,31 +313,35 @@ def GetNutritionFacts(proteinSource, vegetable, sauce):
         next(fileObject)
         for row in reader:
             if proteinSource == row[1]:
-                cal += int(row[4]) * 2
-                protein += float(row[5]) * 2
-                carbs += float(row[6]) * 2
-                fat += float(row[7]) * 2
+                factor = 2
+                cal += int(row[4]) * factor
+                protein += float(row[5]) * factor
+                carbs += float(row[6]) * factor
+                fat += float(row[7]) * factor
     with open('data/vegetables2.csv') as fileObject:
         reader = csv.reader(fileObject)
         next(fileObject)
         for row in reader:
             if vegetable == row[1]:
-                cal += int(row[2]) * 2.5
-                protein += float(row[3]) * 2.5
-                carbs += float(row[4]) * 2.5
-                fat += float(row[5]) * 2.5
+                factor = 2.5
+                cal += int(row[2]) * factor
+                protein += float(row[3]) * factor
+                carbs += float(row[4]) * factor
+                fat += float(row[5]) * factor
     with open('data/sauces2.csv_with_UTF-8_BOM.csv') as fileObject:
         reader = csv.reader(fileObject)
         next(fileObject)
         for row in reader:
             if sauce == row[1]:
-                cal += int(row[2]) * 0.4
-                protein += float(row[3]) * 0.4
-                carbs += float(row[4]) * 0.4
-                fat += float(row[5]) * 0.4
-    facts = [cal, round(protein, 1), round(carbs, 1), round(fat, 1)]
-    #for item in facts:
-        #print(item)
+                factor = 0.5
+                cal += int(row[2]) * factor
+                protein += float(row[3]) * factor
+                carbs += float(row[4]) * factor
+                fat += float(row[5]) * factor
+    percProtein = ((protein * 4) / cal) * 100
+    percCarbs = ((carbs * 4) / cal) * 100
+    percFat = ((fat * 9) / cal) * 100
+    facts = [cal, round(protein, 1), round(carbs, 1), round(fat, 1), round(percProtein), round(percCarbs), round(percFat)]
     return facts
 
  

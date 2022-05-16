@@ -60,7 +60,7 @@ def OpenNewWindow():
             for item in GetSauceEssentials(sauce):                
                 essentialsString += str(item) 
                 essentialsString += '\n'
-            essentialsString += '\nNutrition facts for\nselected meal\n(per serving):\n\n{cal} Kcal\n{protein} g proteins (...%)\n{carbs} g net carbs (...%)\n{fat} g fat (...%)\n'.format(cal=facts[0], protein=facts[1], carbs=facts[2], fat=facts[3])
+            essentialsString += '\nNutrition facts for\nselected meal\n(per serving):\n\n{cal} Kcal\n{protein} g proteins ({percProtein}%)\n{carbs} g net carbs ({percCarbs}%)\n{fat} g fat ({percFat}%)\n'.format(cal=facts[0], protein=facts[1], carbs=facts[2], fat=facts[3], percProtein=facts[4], percCarbs=facts[5], percFat=facts[6])
             listEssentials.set(essentialsString)
         else:
             listEssentials.set("")
